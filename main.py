@@ -15,7 +15,14 @@ def main():
     game = Game(pitcher,batter)
     
     while not game.is_game_over():
-        game.display_state()
+        if game.strikes == 0 and game.balls == 0:
+            # player needs an update to game state upon new batter
+            game.display_game_state()
+            game.display_runner_state()
+            # player needs an update to count on each pitch, except for first
+        else:
+            game.display_count()
+            
         pitch = pitcher.choose_pitch()
         outcome = batter.determine_outcome(pitch)
         print(f"Pitch outcome: {outcome}")
@@ -24,4 +31,5 @@ def main():
     print("Game over!")
         
 if __name__ == "__main__":
+
     main()
